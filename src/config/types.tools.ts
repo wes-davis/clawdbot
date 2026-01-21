@@ -244,6 +244,12 @@ export type MemorySearchConfig = {
     watch?: boolean;
     watchDebounceMs?: number;
     intervalMinutes?: number;
+    sessions?: {
+      /** Minimum appended bytes before session transcripts are reindexed. */
+      deltaBytes?: number;
+      /** Minimum appended JSONL lines before session transcripts are reindexed. */
+      deltaMessages?: number;
+    };
   };
   /** Query behavior. */
   query?: {
@@ -309,6 +315,8 @@ export type ToolsConfig = {
       timeoutSeconds?: number;
       /** Cache TTL in minutes for fetched content. */
       cacheTtlMinutes?: number;
+      /** Maximum number of redirects to follow (default: 3). */
+      maxRedirects?: number;
       /** Override User-Agent header for fetch requests. */
       userAgent?: string;
       /** Use Readability to extract main content (default: true). */

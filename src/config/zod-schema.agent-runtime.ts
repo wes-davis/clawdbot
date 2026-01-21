@@ -147,6 +147,7 @@ export const ToolsWebFetchSchema = z
     maxChars: z.number().int().positive().optional(),
     timeoutSeconds: z.number().int().positive().optional(),
     cacheTtlMinutes: z.number().nonnegative().optional(),
+    maxRedirects: z.number().int().nonnegative().optional(),
     userAgent: z.string().optional(),
   })
   .strict()
@@ -304,6 +305,13 @@ export const MemorySearchSchema = z
         watch: z.boolean().optional(),
         watchDebounceMs: z.number().int().nonnegative().optional(),
         intervalMinutes: z.number().int().nonnegative().optional(),
+        sessions: z
+          .object({
+            deltaBytes: z.number().int().nonnegative().optional(),
+            deltaMessages: z.number().int().nonnegative().optional(),
+          })
+          .strict()
+          .optional(),
       })
       .strict()
       .optional(),
